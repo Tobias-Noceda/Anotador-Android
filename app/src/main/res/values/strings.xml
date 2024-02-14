@@ -1,0 +1,36 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Anotador</string>
+    <string name="classic">Anotador clásico</string>
+    <string name="matches">Anotadores con fosforos</string>
+    <string name="generala">Generala</string>
+    <string name="canasta">Canasta</string>
+    <string name="carioca">Carioca</string>
+    <string name="truco">Truco</string>
+    <string name="escoba">Escoba</string>
+    <string name="free">Libre</string>
+    <string name="back">Volver</string>
+    <string name="ok">OK</string>
+    <string name="restart">Restart</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
+    <string name="close">X</string>
+    <string name="nos">Nos</string>
+    <string name="ellos">Ellos</string>}
+    <string name="mas">+</string>
+    <string name="menos">-</string>
+    <string name="quince">15</string>
+    <string name="treinta">30</string>
+    <string name="jugador">Ingrese un jugador</string>
+    <string name="cantidad" tools:ignore="Typos">Cant. jugadores</string>
+    <string name="puntaje">Ingrese el puntaje</string>
+    <string name="ganador">El juego ha terminado, ganó Jane Doe</string>
+    <string name="instrucciones">Haga click en OK para ir al menu principal, en Restart para iniciar un nuevo juego o cancele para volver al tablero</string>
+    <string name="continuar">¿Desea continuar con la partida anterior?</string>
+    <string name="borrar">Si elige que no, se borrará la partida anterior</string>
+    <string name="caja">¿Desea agregar caja a Tobi?</string>
+    <string name="límite">¿Hasta cuánto desea jugar?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>

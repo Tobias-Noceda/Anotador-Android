@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".frontend.activities.TrucoActivity"
+    android:background="@color/background"
+    android:backgroundTint="@color/background">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/p1ButtonsEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/p2ButtonsStart"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/topMargin"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.02" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/backButtonMargin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/startBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.888"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/endBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.989"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/backButtonWidth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.40"
+        />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/leftShift"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.03"
+        />
+
+    <View
+        android:id="@+id/middleLine"
+        android:layout_width="5dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/topMargin"
+        app:layout_constraintBottom_toBottomOf="@id/backButtonMargin"/>
+
+    <TextView
+        android:id="@+id/p1name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="1dp"
+        android:text="@string/nos"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:background="@color/background"
+        android:backgroundTint="@color/background"
+
+        app:layout_constraintBottom_toTopOf="@id/topLine"
+        app:layout_constraintEnd_toStartOf="@id/middleLine"
+        app:layout_constraintStart_toStartOf="@id/p1ButtonsEnd"
+        app:layout_constraintTop_toTopOf="@id/topMargin" />
+
+    <TextView
+        android:id="@+id/p2name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="1dp"
+        android:text="@string/ellos"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:background="@color/background"
+        android:backgroundTint="@color/background"
+
+        app:layout_constraintBottom_toTopOf="@id/topLine"
+        app:layout_constraintEnd_toStartOf="@id/p2ButtonsStart"
+        app:layout_constraintStart_toEndOf="@id/middleLine"
+        app:layout_constraintTop_toTopOf="@id/topMargin" />
+
+    <View
+        android:id="@+id/topLine"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+
+        app:layout_constraintStart_toStartOf="@id/p1ButtonsEnd"
+        app:layout_constraintEnd_toEndOf="@id/p2ButtonsStart"
+        app:layout_constraintTop_toBottomOf="@id/p1name" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/player1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintTop_toBottomOf="@id/topLine"
+        app:layout_constraintBottom_toTopOf="@id/backButtonMargin"
+        app:layout_constraintStart_toEndOf="@id/p1ButtonsEnd"
+        app:layout_constraintEnd_toStartOf="@id/middleLine" >
+
+        <ImageView
+            android:id="@+id/matches1_0"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="7dp"
+            android:src="@drawable/fosforos0"
+            android:contentDescription="@string/matches"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/matches1_1" />
+
+        <ImageView
+            android:id="@+id/matches1_1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="7dp"
+            android:src="@drawable/fosforos0"
+            android:contentDescription="@string/matches"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/matches1_0"
+            app:layout_constraintBottom_toTopOf="@id/matches1_2" />
+
+        <ImageView
+            android:id="@+id/matches1_2"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="7dp"
+            android:src="@drawable/fosforos0"
+            android:contentDescription="@string/matches"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/matches1_1"
+            app:layout_constraintBottom_toTopOf="@id/divisionLine1" />
+
+        <View
+            android:id="@+id/divisionLine1"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:background="@color/white"
+            android:backgroundTint="@color/white"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/matches1_2"
+            app:layout_constraintBottom_toTopOf="@id/matches1_3" />
+
+        <ImageView
+            android:id="@+id/matches1_3"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="7dp"
+            android:src="@drawable/fosforos0"
+            android:contentDescription="@string/matches"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divisionLine1"
+            app:layout_constraintBottom_toTopOf="@id/matches1_4" />
+
+        <ImageView
+            android:id="@+id/matches1_4"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="7dp"
+            android:src="@drawable/fosforos0"
+            android:contentDescription="@string/matches"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/matches1_3"
+            app:layout_constraintBottom_toTopOf="@id/matches1_5" />
+
+        <ImageView
+            android:id="@+id/matches1_5"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="7dp"
+            android:src="@drawable/fosforos0"
+            android:contentDescription="@string/matches"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/matches1_4"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/player2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintTop_toBottomOf="@id/topLine"
+        app:layout_constraintBottom_toTopOf="@id/backButtonMargin"
+        app:layout_constraintStart_toEndOf="@id/middleLine"
+        app:layout_constraintEnd_toStartOf="@id/p2ButtonsStart" >
+
+        <ImageView
+            android:id="@+id/matches2_0"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="7dp"
+            android:src="@drawable/fosforos0"
+            android:contentDescription="@string/matches"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/matches2_1" />
+
+        <ImageView
+            android:id="@+id/matches2_1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="7dp"
+            android:src="@drawable/fosforos0"
+            android:contentDescription="@string/matches"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/matches2_0"
+            app:layout_constraintBottom_toTopOf="@id/matches2_2" />
+
+        <ImageView
+            android:id="@+id/matches2_2"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="7dp"
+            android:src="@drawable/fosforos0"
+            android:contentDescription="@string/matches"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/matches2_1"
+            app:layout_constraintBottom_toTopOf="@id/divisionLine2" />
+
+        <View
+            android:id="@+id/divisionLine2"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:background="@color/white"
+            android:backgroundTint="@color/white"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/matches2_2"
+            app:layout_constraintBottom_toTopOf="@id/matches2_3" />
+
+        <ImageView
+            android:id="@+id/matches2_3"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="7dp"
+            android:src="@drawable/fosforos0"
+            android:contentDescription="@string/matches"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divisionLine2"
+            app:layout_constraintBottom_toTopOf="@id/matches2_4" />
+
+        <ImageView
+            android:id="@+id/matches2_4"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="7dp"
+            android:src="@drawable/fosforos0"
+            android:contentDescription="@string/matches"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/matches2_3"
+            app:layout_constraintBottom_toTopOf="@id/matches2_5" />
+
+        <ImageView
+            android:id="@+id/matches2_5"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="7dp"
+            android:src="@drawable/fosforos0"
+            android:contentDescription="@string/matches"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/matches2_4"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/plus1"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/round_button"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/mas"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:gravity="center"
+        app:backgroundTint="@color/buttons"
+        app:layout_constraintBottom_toTopOf="@id/minus1"
+        app:layout_constraintEnd_toStartOf="@id/p1ButtonsEnd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topLine"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/minus1"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/menos"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:background="@drawable/round_button"
+        app:backgroundTint="@color/buttons"
+        app:layout_constraintBottom_toTopOf="@id/backButtonMargin"
+        app:layout_constraintEnd_toStartOf="@id/p1ButtonsEnd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/plus1" />
+
+    <Button
+        android:id="@+id/plus2"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/mas"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:background="@drawable/round_button"
+        app:backgroundTint="@color/buttons"
+        app:layout_constraintBottom_toTopOf="@id/minus2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/p2ButtonsStart"
+        app:layout_constraintTop_toBottomOf="@id/topLine" />
+
+    <Button
+        android:id="@+id/minus2"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/menos"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:background="@drawable/round_button"
+        app:backgroundTint="@color/buttons"
+        app:layout_constraintBottom_toTopOf="@id/backButtonMargin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/p2ButtonsStart"
+        app:layout_constraintTop_toBottomOf="@id/plus2" />
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/button"
+        android:contentDescription="@string/back"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/flecha"
+        app:backgroundTint="@color/buttons"
+        app:layout_constraintBottom_toTopOf="@id/endBackButton"
+        app:layout_constraintEnd_toStartOf="@id/backButtonWidth"
+        app:layout_constraintStart_toEndOf="@id/leftShift"
+        app:layout_constraintTop_toBottomOf="@id/startBackButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

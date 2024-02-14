@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".frontend.activities.MainActivity"
+    android:background="@color/background"
+    android:backgroundTint="@color/background">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/logoEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/startFirstButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.308"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/endFirstButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4124"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/startSecondButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4204"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/endSecondButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5248"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/startThirdButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5328"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/endThirdButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6372"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/startFourthButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6452"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/endFourthButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7496"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/startFifthButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7576"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/endFifthButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.862"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/leftShift"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.03"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rightShift"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.97"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"
+        android:contentDescription="@drawable/logo"
+        app:layout_constraintStart_toStartOf="@id/leftShift"
+        app:layout_constraintEnd_toStartOf="@id/rightShift"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/logoEnd"
+        />
+
+    <Button
+        android:id="@+id/classic"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="@string/classic"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:background="@drawable/button"
+        app:backgroundTint="@color/buttons"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@id/endFirstButton"
+        app:layout_constraintEnd_toStartOf="@id/rightShift"
+        app:layout_constraintStart_toEndOf="@id/leftShift"
+        app:layout_constraintTop_toBottomOf="@id/startFirstButton" />
+
+    <Button
+        android:id="@+id/matches"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="@string/matches"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:background="@drawable/button"
+        app:backgroundTint="@color/buttons"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@id/endSecondButton"
+        app:layout_constraintEnd_toStartOf="@id/rightShift"
+        app:layout_constraintStart_toEndOf="@id/leftShift"
+        app:layout_constraintTop_toBottomOf="@id/startSecondButton" />
+
+    <Button
+        android:id="@+id/generala"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="@string/generala"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:background="@drawable/button"
+        app:backgroundTint="@color/buttons"
+        app:cornerRadius="10dp"
+        app:layout_constraintTop_toBottomOf="@id/startThirdButton"
+        app:layout_constraintStart_toEndOf="@id/leftShift"
+        app:layout_constraintEnd_toStartOf="@id/rightShift"
+        app:layout_constraintBottom_toTopOf="@id/endThirdButton"
+        />
+
+    <Button
+        android:id="@+id/canasta"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="@string/canasta"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:background="@drawable/button"
+        app:backgroundTint="@color/buttons"
+        app:cornerRadius="10dp"
+        app:layout_constraintTop_toBottomOf="@id/startFourthButton"
+        app:layout_constraintStart_toEndOf="@id/leftShift"
+        app:layout_constraintEnd_toStartOf="@id/rightShift"
+        app:layout_constraintBottom_toTopOf="@id/endFourthButton"
+        />
+
+    <Button
+        android:id="@+id/carioca"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="@string/carioca"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:background="@drawable/button"
+        app:backgroundTint="@color/buttons"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@id/endFifthButton"
+        app:layout_constraintEnd_toStartOf="@id/rightShift"
+        app:layout_constraintStart_toEndOf="@id/leftShift"
+        app:layout_constraintTop_toBottomOf="@id/startFifthButton" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
