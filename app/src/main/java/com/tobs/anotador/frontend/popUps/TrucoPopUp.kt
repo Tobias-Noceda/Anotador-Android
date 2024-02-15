@@ -13,6 +13,8 @@ import com.tobs.anotador.R
 class TrucoPopUp(
     private val caller: AppCompatActivity
 ) : DialogFragment() {
+
+    private var used = false
     private var limit = 0
 
     override fun onCreateView(
@@ -30,11 +32,13 @@ class TrucoPopUp(
         val treintaBtn = view.findViewById<Button>(R.id.treinta)
 
         quinceBtn.setOnClickListener {
+            used = true
             limit = 15
             dismiss()
         }
 
         treintaBtn.setOnClickListener {
+            used = true
             limit = 30
             dismiss()
         }
@@ -47,6 +51,8 @@ class TrucoPopUp(
 
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
-        OnTrucoStarter.start(limit, caller)
+        if(used) {
+            OnTrucoStarter.start(limit, caller)
+        }
     }
 }

@@ -15,6 +15,7 @@ import com.tobs.anotador.frontend.activities.GameActivity
 import java.lang.NumberFormatException
 
 class PlayerCountPopUp(private val callingClass: Class<out GameActivity>) : DialogFragment(), DialogInterface.OnDismissListener {
+
     private var players: Int = 0
     private var used = false
     private var listener: PlayersPopUpClosedListener? = null
