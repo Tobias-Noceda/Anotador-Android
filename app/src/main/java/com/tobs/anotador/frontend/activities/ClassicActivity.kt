@@ -27,7 +27,7 @@ class ClassicActivity : GameActivity(), CellClickListener, OnScorePopUpListener,
     companion object {
         private var cellList: MutableList<CellGridModal> = ArrayList()
         var game: ClassicScorekeeper? = null
-        var rows = 0
+        private var rows = 0
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
