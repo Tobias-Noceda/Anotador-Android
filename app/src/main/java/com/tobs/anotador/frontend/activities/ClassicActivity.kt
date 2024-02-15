@@ -27,6 +27,7 @@ class ClassicActivity : GameActivity(), CellClickListener, OnScorePopUpListener,
     companion object {
         private var cellList: MutableList<CellGridModal> = ArrayList()
         var game: ClassicScorekeeper? = null
+        var rows = 0
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,6 +84,14 @@ class ClassicActivity : GameActivity(), CellClickListener, OnScorePopUpListener,
         val index: Int = game?.getPlayedRounds(playerNumber) as Int * game?.players?.size as Int + playerNumber
         cellList[index] = cellList[index].copy(value = game?.getScore(playerNumber) as String)
 
+        if(round && game?.getPlayedRounds(playerNumber) == rows) {
+            val prevCells = cellList.size
+            val playerCount = (game as ClassicScorekeeper).players.size
+            while(cellList.size < prevCells + playerCount) {
+                cellList.add(CellGridModal(cellList.size % playerCount, cellList.size / playerCount, ""))
+            }
+            rows++
+        }
         redraw()
     }
 
@@ -120,6 +129,7 @@ class ClassicActivity : GameActivity(), CellClickListener, OnScorePopUpListener,
             cellList.add(CellGridModal(i % game?.columns as Int, i / game?.columns as Int, value))
         }
 
+        rows = 10
         redraw()
     }
 

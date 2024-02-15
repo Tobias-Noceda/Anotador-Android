@@ -169,6 +169,8 @@ class LibreActivity : MatchesActivity(), OnFinishedPopUpListener, OnPopUpClosedL
             if(score < matches?.roundsLimit as Int) {
                 finished = matches?.addScore(playerIndex, 1) as Boolean
                 addScore(playerIndex, score + 1)
+            } else {
+                finished = true
             }
             if(finished) {
                 val finishedPopUp = FinishedPopUp(matches?.players?.get(playerIndex) as String)
@@ -179,9 +181,11 @@ class LibreActivity : MatchesActivity(), OnFinishedPopUpListener, OnPopUpClosedL
     }
 
     private fun dec(playerIndex: Int) {
-        finished = false
-        matches?.addScore(playerIndex, -1)
         try {
+            if((matches as Matches).getScore(playerIndex).toInt() == matches?.roundsLimit) {
+                finished = false
+            }
+            matches?.addScore(playerIndex, -1)
             decScore(playerIndex, matches?.getScore(playerIndex)?.toInt() as Int)
         } catch (_: Exception) {}
     }

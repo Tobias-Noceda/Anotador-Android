@@ -167,6 +167,8 @@ class TrucoActivity : MatchesActivity(), OnFinishedPopUpListener {
             if(score < truco?.roundsLimit as Int) {
                 finished = truco?.addScore(playerIndex, 1) as Boolean
                 addScore(playerIndex, score + 1)
+            } else {
+                finished = true
             }
             if(finished) {
                 val finishedPopUp = FinishedPopUp(truco?.players?.get(playerIndex) as String)
@@ -177,9 +179,11 @@ class TrucoActivity : MatchesActivity(), OnFinishedPopUpListener {
     }
 
     private fun dec(playerIndex: Int) {
-        finished = false
-        truco?.addScore(playerIndex, -1)
         try {
+            if((truco as Matches).getScore(playerIndex).toInt() == truco?.roundsLimit) {
+                finished = false
+            }
+            truco?.addScore(playerIndex, -1)
             decScore(playerIndex, truco?.getScore(playerIndex)?.toInt() as Int)
         } catch (_: Exception) {}
     }

@@ -144,6 +144,8 @@ class EscobaActivity : MatchesActivity(), OnFinishedPopUpListener, OnPopUpClosed
             if(score < escoba?.roundsLimit as Int) {
                 finished = escoba?.addScore(playerIndex, 1) as Boolean
                 addScore(playerIndex, score + 1)
+            } else {
+                finished = true
             }
             if(finished) {
                 val finishedPopUp = FinishedPopUp(escoba?.players?.get(playerIndex) as String)
@@ -154,9 +156,11 @@ class EscobaActivity : MatchesActivity(), OnFinishedPopUpListener, OnPopUpClosed
     }
 
     private fun dec(playerIndex: Int) {
-        finished = false
-        escoba?.addScore(playerIndex, -1)
         try {
+            if(escoba?.getScore(playerIndex) == "15") {
+                finished = false
+            }
+            escoba?.addScore(playerIndex, -1)
             decScore(playerIndex, escoba?.getScore(playerIndex)?.toInt() as Int)
         } catch (_: Exception) {}
     }

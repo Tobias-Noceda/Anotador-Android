@@ -82,5 +82,4 @@ public class Generala extends Scorekeeper {
         playerScores.add("0");
         return playerScores;
     }
-
 }
