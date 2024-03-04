@@ -64,11 +64,14 @@ class PlayerCountPopUp(private val callingClass: Class<out GameActivity>) : Dial
     }
 
     private fun use(text: String): Boolean {
-        if(text.isEmpty() || text == "0") {
+        if(text.trim().isEmpty() || text == "0") {
             Toast.makeText(context, "Entrada inválida", Toast.LENGTH_LONG).show()
         } else {
             try {
-                players = text.toInt()
+                players = text.trim().toInt()
+                if(players <= 0 || players > 10) {
+                    throw NumberFormatException()
+                }
                 used = true
                 dismiss()
                 return true

@@ -81,7 +81,7 @@ class LibreActivity : MatchesActivity(), OnFinishedPopUpListener, OnPopUpClosedL
         gameImages = ArrayList()
         for(player in 0 until 2) {
             gameImages.add(ArrayList())
-            for(image in 0 until matches?.roundsLimit as Int / 5) {
+            for(image in 0 .. matches?.roundsLimit as Int / 5) {
                 gameImages[player].add(getImage(player, image))
                 if(replace) {
                     gameImages[player][image].setImageResource(R.drawable.fosforos0)

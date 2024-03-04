@@ -70,10 +70,10 @@ class DismissibleTextPopUp(private var playerNumber: Int, private var callingCla
     }
 
     private fun use(text: String): Boolean {
-        if(text.isEmpty()) {
+        if(text.trim().isEmpty()) {
             Toast.makeText(context, "Entrada inválida", Toast.LENGTH_LONG).show()
         } else {
-            result = text
+            result = text.trim()
             used = true
             dismiss()
             return true

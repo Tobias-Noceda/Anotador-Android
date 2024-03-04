@@ -67,10 +67,10 @@ class TextPopUp(private var playerNumber: Int, private var callingClass: Class<o
     }
 
     private fun use(text: String): Boolean {
-        if(text.isEmpty()) {
+        if(text.trim().isEmpty()) {
             Toast.makeText(context, "Entrada inválida", Toast.LENGTH_LONG).show()
         } else {
-            result = text
+            result = text.trim()
             dismiss()
             return true
         }
