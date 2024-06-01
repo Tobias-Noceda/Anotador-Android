@@ -59,7 +59,7 @@ class GeneralaActivity : GameActivity(), CellClickListener, OnScorePopUpListener
             finishedPopUp.setOnPopUpClosedListener(this)
             finishedPopUp.show(supportFragmentManager, "finished")
         } else if(playerIndex != 0 && row != 0 && row != generala?.rows as Int - 1) {
-            val popUp = ScorePopUp("${generala?.getScore(0, row)} de ${generala?.players?.get(playerIndex - 1)}", playerIndex, row)
+            val popUp = ScorePopUp("${generala?.getScore(0, row)} de ${generala?.players?.get(playerIndex)}", playerIndex, row)
             popUp.setOnPopUpClosedListener(this)
             popUp.show(supportFragmentManager, "score")
         }
