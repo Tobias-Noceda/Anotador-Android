@@ -92,7 +92,7 @@ class CanastaActivity : GameActivity(), CellClickListener, OnScorePopUpListener,
                     finished = true
                 }
             }
-            cellList[index + 2] = cellList[index + 2].copy(value = canasta?.getScore(playerNumber, (canasta as Canasta).getPlayedRounds(playerNumber) + 1).toString())
+            cellList[index + 2] = cellList[index + 2].copy(value = canasta?.getScore(playerNumber, (canasta as Canasta).getPlayedRounds(playerNumber)).toString())
             cellList[playerNumber] = cellList[playerNumber].copy(value = "${canasta?.players?.get(playerNumber)} (${canasta?.getFloor(playerNumber)})")
             if(!finished && (canasta as Canasta).getPlayedRounds(playerNumber) == rows && (canasta as Canasta).getPlayedRounds(if(playerNumber == 0) 1 else 0) == rows) {
                 val prevCells = cellList.size

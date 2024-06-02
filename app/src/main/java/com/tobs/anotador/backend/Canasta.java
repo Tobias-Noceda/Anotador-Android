@@ -43,9 +43,10 @@ public class Canasta extends ClassicScorekeeper {
      */
     @Override
     public boolean addScore(int id, Integer newScore) {
-        super.addScore(id, newScore);
-        Integer score = Integer.parseInt(getScore(id, getPlayedRounds(id) - 2));
+        Integer score = Integer.parseInt(getPlayedRounds(id) - 2 == 0 ? "0" : getScore(id, getPlayedRounds(id) - 2));
         score += newScore;
+        super.setScore(id, score);
+        incPlayedRounds(id);
         if(score >= limit1 && score < limit2) {
             floor.set(id, 90);
         } else if(score >= limit2 && score < limit3) {
@@ -56,6 +57,12 @@ public class Canasta extends ClassicScorekeeper {
         }
 
         return false;
+    }
+
+    @Override
+    public void setScore(int playerIndex, Integer newScore) {
+        super.setScore(playerIndex, newScore);
+        incPlayedRounds(playerIndex);
     }
 
     /**

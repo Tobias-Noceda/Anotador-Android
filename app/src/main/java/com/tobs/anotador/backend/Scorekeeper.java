@@ -90,7 +90,7 @@ public abstract class Scorekeeper {
      */
     public boolean addScore(int playerIndex, Integer newScore) {
         Integer previousScore = Integer.parseInt(getScore(playerIndex));
-        setScore(playerIndex, previousScore + newScore);
+        this.setScore(playerIndex, previousScore + newScore);
 
         return false;
     }

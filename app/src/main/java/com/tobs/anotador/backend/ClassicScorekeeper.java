@@ -33,6 +33,10 @@ public class ClassicScorekeeper extends Scorekeeper {
         return playedRounds.get(playerIndex);
     }
 
+    public void incPlayedRounds(int playerIndex) {
+        playedRounds.set(playerIndex, getPlayedRounds(playerIndex) + 1);
+    }
+
     /**
      * Lets the user get the score of the player with the given index.
      * @param playerIndex The index of the player.
