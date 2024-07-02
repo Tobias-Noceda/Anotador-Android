@@ -16,7 +16,7 @@ public class Matches extends Scorekeeper {
             List<String> lista = new ArrayList<>();
             lista.add(player.getName());
             lista.add("0");
-            playersList.add(player.getId(), lista);
+            playersList.add(player.getId() - 1, lista);
         }
 
         setPlayers(playersList);

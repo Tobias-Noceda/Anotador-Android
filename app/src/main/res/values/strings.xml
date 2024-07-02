@@ -8,29 +8,27 @@
     <string name="truco">Truco</string>
     <string name="escoba">Escoba</string>
     <string name="free">Libre</string>
-    <string name="back">Volver</string>
+    <string name="history">Historial</string>
     <string name="ok">OK</string>
     <string name="restart">Restart</string>
-    <string name="si">Si</string>
+    <string name="yes">Si</string>
     <string name="no">No</string>
-    <string name="close">X</string>
-    <string name="nos">Nos</string>
-    <string name="ellos">Ellos</string>}
-    <string name="mas">+</string>
-    <string name="menos">-</string>
-    <string name="quince">15</string>
-    <string name="treinta">30</string>
-    <string name="jugador">Ingrese un jugador</string>
-    <string name="cantidad" tools:ignore="Typos">Cant. jugadores</string>
-    <string name="puntaje">Ingrese el puntaje</string>
-    <string name="ganador">El juego ha terminado, ganó Jane Doe</string>
-    <string name="instrucciones">Haga click en OK para ir al menu principal, en Restart para iniciar un nuevo juego o cancele para volver al tablero</string>
-    <string name="continuar">¿Desea continuar con la partida anterior?</string>
-    <string name="borrar">Si elige que no, se borrará la partida anterior</string>
-    <string name="caja">¿Desea agregar caja a Tobi?</string>
-    <string name="límite">¿Hasta cuánto desea jugar?</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-
+    <string name="us">Nos</string>
+    <string name="them">Ellos</string>}
+    <string name="fifteen">15</string>
+    <string name="thirty">30</string>
+    <string name="player">Jugador</string>
+    <string name="empty_name">Debe ingresar un nombre</string>
+    <string name="integer">Debe ingresar un número entero</string>
+    <string name="positive">Debe ingresar un número entero mayor a 1</string>
+    <string name="positive_zero">Debe ingresar un número entero mayor o igual a 0</string>
+    <string name="amount" tools:ignore="Typos">Cant. jugadores</string>
+    <string name="score">Puntaje de</string>
+    <string name="base">Base de</string>
+    <string name="won">El juego ha terminado, ganó</string>
+    <string name="instructions">Haga click en OK para ir al menu principal, en Restart para iniciar un nuevo juego o cancele para volver al tablero</string>
+    <string name="continue_game">¿Desea continuar con la partida anterior?</string>
+    <string name="lost">Si elige que no, se borrará la partida anterior</string>
+    <string name="cash">Desea una agregar caja a </string>
+    <string name="limit">¿Hasta cuánto desea jugar?</string>
 </resources>
