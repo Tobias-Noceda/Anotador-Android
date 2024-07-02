@@ -10,41 +10,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Anotador"
+        android:theme="@style/Theme.AnotadorAndroid"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".frontend.activities.ClassicActivity"
-            android:exported="false" />
-        <activity
-            android:name=".frontend.activities.LibreActivity"
-            android:exported="false" />
-        <activity
-            android:name=".frontend.activities.EscobaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".frontend.activities.TrucoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".frontend.activities.CariocaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".frontend.activities.GeneralaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".frontend.activities.CanastaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".frontend.activities.AdditionalMenuActivity"
-            android:exported="false" />
-        <activity
-            android:name=".frontend.activities.MainActivity"
-            android:exported="true">
+            android:name=".frontend.MainActivityCompose"
+            android:exported="true"
+            android:theme="@style/Theme.AnotadorAndroid">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

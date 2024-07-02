@@ -46,7 +46,6 @@ public class Generala extends Scorekeeper {
         return getRoundsCount().equals(getRoundsLimit());
     }
 
-
     /**
      * Builds the first column of the grid of scores with the rounds.
      *

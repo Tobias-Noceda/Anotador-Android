@@ -73,7 +73,7 @@ public class Canasta extends ClassicScorekeeper {
      */
     @Override
     public String getScore(int id) {
-        return getScore(id, getPlayedRounds(id) - 1);
+        return getScore(id, getPlayedRounds(id));
     }
 
 }
