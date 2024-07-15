@@ -14,6 +14,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -37,6 +38,7 @@ import com.tobs.anotador.frontend.screens.generic.MenuScreen
 import com.tobs.anotador.frontend.starters.GetPlayerCount
 import com.tobs.anotador.frontend.starters.GetPlayersList
 import com.tobs.anotador.frontend.starters.updateDb
+import com.tobs.anotador.viewModel.GameViewModel
 
 enum class AppDestinations(
     @StringRes val nameRef: Int,
@@ -56,65 +58,111 @@ enum class AppDestinations(
 
 @Composable
 fun AnotadorApp(
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
+    gameViewModel: GameViewModel = viewModel()
 ) {
-    var clicked by rememberSaveable { mutableStateOf<AppDestinations?>(null) }
-    var playersList: List<Player> by rememberSaveable { mutableStateOf(emptyList()) }
-    var restart by rememberSaveable { mutableStateOf(false) }
-
-    // Games
-    var classic: ClassicScorekeeper? by rememberSaveable { mutableStateOf(null) }
-    var truco: Matches? by rememberSaveable { mutableStateOf(null) }
-    var escoba: Matches? by rememberSaveable { mutableStateOf(null) }
-    var free: Matches? by rememberSaveable { mutableStateOf(null) }
-    var generala: Generala? by rememberSaveable { mutableStateOf(null) }
-    var canasta: Canasta? by rememberSaveable { mutableStateOf(null) }
-    var carioca: Carioca? by rememberSaveable { mutableStateOf(null) }
-
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(MaterialTheme.colorScheme.primary)) {
-        Router(
-            navController,
-            classic,
-            truco,
-            escoba,
-            free,
-            generala,
-            canasta,
-            carioca,
-            setClicked = { clicked = it },
-            restart = { restart = true }
+    with(gameViewModel) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.primary)
         ) {
-            when(it) {
-                AppDestinations.CLASSIC -> { classic = null }
-                AppDestinations.TRUCO -> { truco = null }
-                AppDestinations.ESCOBA -> { escoba = null }
-                AppDestinations.FREE -> { free = null }
-                AppDestinations.GENERALA -> { generala = null }
-                AppDestinations.CANASTA -> { canasta = null }
-                AppDestinations.CARIOCA -> { carioca = null }
-                else -> {}
+            Router(
+                navController,
+                classic,
+                truco,
+                escoba,
+                free,
+                generala,
+                canasta,
+                carioca,
+                setClicked = { clicked = it },
+                restart = { restart = true }
+            ) {
+                when (it) {
+                    AppDestinations.CLASSIC -> {
+                        classic = null
+                    }
+
+                    AppDestinations.TRUCO -> {
+                        truco = null
+                    }
+
+                    AppDestinations.ESCOBA -> {
+                        escoba = null
+                    }
+
+                    AppDestinations.FREE -> {
+                        free = null
+                    }
+
+                    AppDestinations.GENERALA -> {
+                        generala = null
+                    }
+
+                    AppDestinations.CANASTA -> {
+                        canasta = null
+                    }
+
+                    AppDestinations.CARIOCA -> {
+                        carioca = null
+                    }
+
+                    else -> {}
+                }
             }
-        }
-        when(clicked) {
-            AppDestinations.CLASSIC -> {
-                if(classic == null || restart) {
-                    var playerCount by rememberSaveable { mutableIntStateOf(0) }
-                    if(playerCount == 0) {
-                        GetPlayerCount {
-                            if (it == null) {
+            when (clicked) {
+                AppDestinations.CLASSIC -> {
+                    if (classic == null || restart) {
+                        var playerCount by rememberSaveable { mutableIntStateOf(0) }
+                        if (playerCount == 0) {
+                            GetPlayerCount {
+                                if (it == null) {
+                                    clicked = null
+                                    restart = false
+                                } else {
+                                    playerCount = it
+                                }
+                            }
+                        } else {
+                            GetPlayersList(playerCount) { collectedPlayers ->
+                                if (collectedPlayers.isNotEmpty()) {
+                                    playersList = collectedPlayers
+                                    classic = ClassicScorekeeper(playersList)
+                                    clicked?.let {
+                                        if (restart) {
+                                            navController.navigateUp()
+                                        }
+                                        navController.navigate(it.route)
+                                    }
+                                }
                                 clicked = null
                                 restart = false
-                            } else {
-                                playerCount = it
                             }
                         }
                     } else {
-                        GetPlayersList(playerCount) { collectedPlayers ->
-                            if (collectedPlayers.isNotEmpty()) {
-                                playersList = collectedPlayers
-                                classic = ClassicScorekeeper(playersList)
+                        ResumePopUp(
+                            onYes = {
+                                clicked?.let { navController.navigate(it.route) }; clicked = null
+                            },
+                            onNo = { classic = null }
+                        ) { clicked = null }
+                    }
+                }
+
+                AppDestinations.MATCHES -> {
+                    navController.navigate(AppDestinations.MATCHES.route)
+                }
+
+                AppDestinations.TRUCO -> {
+                    if (truco == null || restart) {
+                        playersList = listOf(
+                            Player(1, stringResource(id = R.string.us)),
+                            Player(2, stringResource(id = R.string.them))
+                        )
+                        TrucoPopUp { limit ->
+                            if (limit != null) {
+                                truco = Matches(playersList, limit)
                                 clicked?.let {
                                     if (restart) {
                                         navController.navigateUp()
@@ -125,81 +173,22 @@ fun AnotadorApp(
                             clicked = null
                             restart = false
                         }
-                    }
-                } else {
-                    ResumePopUp(
-                        onYes = { clicked?.let { navController.navigate(it.route) }; clicked = null },
-                        onNo = { classic = null }
-                    ) { clicked = null }
-                }
-            }
-            AppDestinations.MATCHES -> { navController.navigate(AppDestinations.MATCHES.route) }
-            AppDestinations.TRUCO -> {
-                if (truco == null || restart) {
-                    playersList = listOf(
-                        Player(1, stringResource(id = R.string.us)),
-                        Player(2, stringResource(id = R.string.them))
-                    )
-                    TrucoPopUp { limit ->
-                        if (limit != null) {
-                            truco = Matches(playersList, limit)
-                            clicked?.let {
-                                if(restart) {
-                                    navController.navigateUp()
-                                }
-                                navController.navigate(it.route)
-                            }
-                        }
-                        clicked = null
-                        restart = false
-                    }
-                } else {
-                    ResumePopUp(
-                        onYes = { clicked?.let { navController.navigate(it.route) }; clicked = null },
-                        onNo = { truco = null }
-                    ) { clicked = null }
-                }
-            }
-            AppDestinations.ESCOBA -> {
-                if (escoba == null || restart) {
-                    GetPlayersList { collectedPlayers ->
-                        if (collectedPlayers.isNotEmpty()) {
-                            playersList = collectedPlayers
-                            escoba = Matches(playersList, 15)
-                            clicked?.let {
-                                if (restart) {
-                                    navController.navigateUp()
-                                }
-                                navController.navigate(it.route)
-                            }
-                        }
-                        clicked = null
-                        restart = false
-                    }
-                } else {
-                    ResumePopUp(
-                        onYes = { clicked?.let { navController.navigate(it.route) }; clicked = null },
-                        onNo = { escoba = null }
-                    ) { clicked = null }
-                }
-            }
-            AppDestinations.FREE -> {
-                if(free == null || restart) {
-                    var limit by rememberSaveable { mutableIntStateOf(0) }
-                    if(limit == 0) {
-                        GetPlayerCount {
-                            if (it == null) {
-                                clicked = null
-                                restart = false
-                            } else {
-                                limit = it
-                            }
-                        }
                     } else {
+                        ResumePopUp(
+                            onYes = {
+                                clicked?.let { navController.navigate(it.route) }; clicked = null
+                            },
+                            onNo = { truco = null }
+                        ) { clicked = null }
+                    }
+                }
+
+                AppDestinations.ESCOBA -> {
+                    if (escoba == null || restart) {
                         GetPlayersList { collectedPlayers ->
                             if (collectedPlayers.isNotEmpty()) {
                                 playersList = collectedPlayers
-                                free = Matches(playersList, limit)
+                                escoba = Matches(playersList, 15)
                                 clicked?.let {
                                     if (restart) {
                                         navController.navigateUp()
@@ -210,89 +199,98 @@ fun AnotadorApp(
                             clicked = null
                             restart = false
                         }
+                    } else {
+                        ResumePopUp(
+                            onYes = {
+                                clicked?.let { navController.navigate(it.route) }; clicked = null
+                            },
+                            onNo = { escoba = null }
+                        ) { clicked = null }
                     }
-                } else {
-                    ResumePopUp(
-                        onYes = { clicked?.let { navController.navigate(it.route) }; clicked = null },
-                        onNo = { free = null }
-                    ) { clicked = null }
                 }
-            }
-            AppDestinations.GENERALA -> {
-                if(generala == null || restart) {
-                    var playerCount by rememberSaveable { mutableIntStateOf(0) }
-                    if(playerCount == 0) {
-                        GetPlayerCount {
-                            if (it == null) {
+
+                AppDestinations.FREE -> {
+                    if (free == null || restart) {
+                        var limit by rememberSaveable { mutableIntStateOf(0) }
+                        if (limit == 0) {
+                            GetPlayerCount {
+                                if (it == null) {
+                                    clicked = null
+                                    restart = false
+                                } else {
+                                    limit = it
+                                }
+                            }
+                        } else {
+                            GetPlayersList { collectedPlayers ->
+                                if (collectedPlayers.isNotEmpty()) {
+                                    playersList = collectedPlayers
+                                    free = Matches(playersList, limit)
+                                    clicked?.let {
+                                        if (restart) {
+                                            navController.navigateUp()
+                                        }
+                                        navController.navigate(it.route)
+                                    }
+                                }
                                 clicked = null
                                 restart = false
-                            } else {
-                                playerCount = it
                             }
                         }
                     } else {
-                        GetPlayersList(playerCount) { collectedPlayers ->
-                            if (collectedPlayers.isNotEmpty()) {
-                                playersList = collectedPlayers
-                                generala = Generala(playersList, playerCount)
-                                clicked?.let {
-                                    if (restart) {
-                                        navController.navigateUp()
+                        ResumePopUp(
+                            onYes = {
+                                clicked?.let { navController.navigate(it.route) }; clicked = null
+                            },
+                            onNo = { free = null }
+                        ) { clicked = null }
+                    }
+                }
+
+                AppDestinations.GENERALA -> {
+                    if (generala == null || restart) {
+                        var playerCount by rememberSaveable { mutableIntStateOf(0) }
+                        if (playerCount == 0) {
+                            GetPlayerCount {
+                                if (it == null) {
+                                    clicked = null
+                                    restart = false
+                                } else {
+                                    playerCount = it
+                                }
+                            }
+                        } else {
+                            GetPlayersList(playerCount) { collectedPlayers ->
+                                if (collectedPlayers.isNotEmpty()) {
+                                    playersList = collectedPlayers
+                                    generala = Generala(playersList, playerCount)
+                                    clicked?.let {
+                                        if (restart) {
+                                            navController.navigateUp()
+                                        }
+                                        navController.navigate(it.route)
                                     }
-                                    navController.navigate(it.route)
                                 }
-                            }
-                            clicked = null
-                            restart = false
-                        }
-                    }
-                } else {
-                    ResumePopUp(
-                        onYes = { clicked?.let { navController.navigate(it.route) }; clicked = null },
-                        onNo = { generala = null }
-                    ) { clicked = null }
-                }
-            }
-            AppDestinations.CANASTA -> {
-                if(canasta == null || restart) {
-                    GetPlayersList { collectedPlayers ->
-                        if (collectedPlayers.isNotEmpty()) {
-                            playersList = collectedPlayers
-                            canasta = Canasta(playersList, 1500, 3000, 5000)
-                            clicked?.let {
-                                if(restart) {
-                                    navController.navigateUp()
-                                }
-                                navController.navigate(it.route)
-                            }
-                        }
-                        clicked = null
-                        restart = false
-                    }
-                } else {
-                    ResumePopUp(
-                        onYes = { clicked?.let { navController.navigate(it.route) }; clicked = null },
-                        onNo = { canasta = null }
-                    ) { clicked = null }
-                }
-            }
-            AppDestinations.CARIOCA -> {
-                if(carioca == null || restart) {
-                    var playerCount by rememberSaveable { mutableIntStateOf(0) }
-                    if(playerCount == 0) {
-                        GetPlayerCount {
-                            if (it == null) {
                                 clicked = null
                                 restart = false
-                            } else {
-                                playerCount = it
                             }
                         }
                     } else {
-                        GetPlayersList(playerCount) { collectedPlayers ->
+                        ResumePopUp(
+                            onYes = {
+                                clicked?.let { navController.navigate(it.route) }; clicked = null
+                            },
+                            onNo = { generala = null }
+                        ) { clicked = null }
+                    }
+                }
+
+                AppDestinations.CANASTA -> {
+                    if (canasta == null || restart) {
+                        GetPlayersList { collectedPlayers ->
                             if (collectedPlayers.isNotEmpty()) {
                                 playersList = collectedPlayers
-                                carioca = Carioca(playersList, 2)
+                                canasta = Canasta(playersList, 1500, 3000, 5000)
                                 clicked?.let {
                                     if (restart) {
                                         navController.navigateUp()
@@ -303,15 +301,56 @@ fun AnotadorApp(
                             clicked = null
                             restart = false
                         }
+                    } else {
+                        ResumePopUp(
+                            onYes = {
+                                clicked?.let { navController.navigate(it.route) }; clicked = null
+                            },
+                            onNo = { canasta = null }
+                        ) { clicked = null }
                     }
-                } else {
-                    ResumePopUp(
-                        onYes = { clicked?.let { navController.navigate(it.route) }; clicked = null },
-                        onNo = { carioca = null }
-                    ) { clicked = null }
                 }
+
+                AppDestinations.CARIOCA -> {
+                    if (carioca == null || restart) {
+                        var playerCount by rememberSaveable { mutableIntStateOf(0) }
+                        if (playerCount == 0) {
+                            GetPlayerCount {
+                                if (it == null) {
+                                    clicked = null
+                                    restart = false
+                                } else {
+                                    playerCount = it
+                                }
+                            }
+                        } else {
+                            GetPlayersList(playerCount) { collectedPlayers ->
+                                if (collectedPlayers.isNotEmpty()) {
+                                    playersList = collectedPlayers
+                                    carioca = Carioca(playersList, 2)
+                                    clicked?.let {
+                                        if (restart) {
+                                            navController.navigateUp()
+                                        }
+                                        navController.navigate(it.route)
+                                    }
+                                }
+                                clicked = null
+                                restart = false
+                            }
+                        }
+                    } else {
+                        ResumePopUp(
+                            onYes = {
+                                clicked?.let { navController.navigate(it.route) }; clicked = null
+                            },
+                            onNo = { carioca = null }
+                        ) { clicked = null }
+                    }
+                }
+
+                else -> {}
             }
-            else -> { }
         }
     }
 }
