@@ -86,7 +86,7 @@ fun CariocaScreen(modifier: Modifier, carioca: Carioca, onBack: () -> Unit, onRe
             adding = null
         } else {
             playedRound = carioca.getPlayedRounds(adding!!)
-            if (playedRound <= minPlayedRounds + 1) {
+            if (playedRound <= minPlayedRounds) {
                 GetPoints(playerName = players[adding!!]) {
                     if (it != null) {
                         if (playedRound == minPlayedRounds + 1) {
