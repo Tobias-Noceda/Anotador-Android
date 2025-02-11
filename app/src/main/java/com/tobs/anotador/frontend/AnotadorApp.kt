@@ -36,6 +36,7 @@ import com.tobs.anotador.frontend.screens.generic.MatchesScreen
 import com.tobs.anotador.frontend.screens.generic.MenuScreen
 import com.tobs.anotador.frontend.starters.GetPlayerCount
 import com.tobs.anotador.frontend.starters.GetPlayersList
+import com.tobs.anotador.frontend.starters.GetPointLimit
 import com.tobs.anotador.frontend.starters.updateDb
 import com.tobs.anotador.viewModel.GameViewModel
 
@@ -212,7 +213,7 @@ fun AnotadorApp(
                     if (free == null || restart) {
                         var limit by rememberSaveable { mutableIntStateOf(0) }
                         if (limit == 0) {
-                            GetPlayerCount {
+                            GetPointLimit {
                                 if (it == null) {
                                     clicked = null
                                     restart = false
