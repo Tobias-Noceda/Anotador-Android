@@ -8,7 +8,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -461,14 +460,20 @@ private fun Router(
                 modifier = modifier,
                 generala = generala!!,
                 onBack = { winner ->
-                    updateDb(context, "Gen", generala.players, winner)
-                    navController.navigateUp()
-                    reset(AppDestinations.GENERALA)
+                    if(generala.players.size == 3) {
+                        val myPlayers = generala.players.drop(1).toMutableList()
+                        updateDb(context, "Gen", myPlayers, winner)
+                        navController.navigateUp()
+                        reset(AppDestinations.GENERALA)
+                    }
                 }
             ) { winner ->
-                updateDb(context, "Gen", generala.players, winner)
-                restart()
-                setClicked(AppDestinations.GENERALA)
+                if(generala.players.size == 3) {
+                    val myPlayers = generala.players.drop(1).toMutableList()
+                    updateDb(context, "Gen", myPlayers, winner)
+                    restart()
+                    setClicked(AppDestinations.GENERALA)
+                }
             }
         }
 
