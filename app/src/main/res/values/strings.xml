@@ -23,6 +23,7 @@
     <string name="integer">Debe ingresar un número entero</string>
     <string name="positive">Debe ingresar un número entero mayor a 1</string>
     <string name="positive_zero">Debe ingresar un número entero mayor o igual a 0</string>
+    <string name="matches_limit">Debe ingresar un número entero entre 1 y 30</string>
     <string name="amount" tools:ignore="Typos">Cant. jugadores</string>
     <string name="free_limit" tools:ignore="Typos">Limite de puntos</string>
     <string name="score">Puntaje de</string>

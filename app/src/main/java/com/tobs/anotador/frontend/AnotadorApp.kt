@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -14,7 +13,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -221,7 +219,10 @@ fun AnotadorApp(
                     if (free == null || restart) {
                         var limit by rememberSaveable { mutableIntStateOf(0) }
                         if (limit == 0) {
-                            GetPointLimit {
+                            GetPointLimit(
+                                boundsCheck = { it in 1..30 },
+                                outBoundsMsg = stringResource(id = R.string.matches_limit)
+                            ) {
                                 if (it == null) {
                                     clicked = null
                                     restart = false
