@@ -20,4 +20,5 @@ class GameViewModel : ViewModel() {
     var generala: Generala? by mutableStateOf(null)
     var canasta: Canasta? by mutableStateOf(null)
     var carioca: Carioca? by mutableStateOf(null)
+    var cocktail: Cocktail? by mutableStateOf(null)
 }
