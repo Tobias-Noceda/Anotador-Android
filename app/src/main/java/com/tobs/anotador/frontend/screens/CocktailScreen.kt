@@ -83,7 +83,7 @@ fun CocktailScreen(modifier: Modifier, cocktail: Cocktail, onBack: () -> Unit, o
             adding = null
         } else {
             playedRound = cocktail.getPlayedRounds(adding!!)
-            if (playedRound <= minPlayedRounds) {
+            if (playedRound <= minPlayedRounds + 1) {
                 GetPoints(playerName = players[adding!!]) {
                     if (it != null) {
                         if (playedRound == minPlayedRounds + 1) {
