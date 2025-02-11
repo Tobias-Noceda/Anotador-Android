@@ -6,11 +6,11 @@ import com.tobs.anotador.R
 import com.tobs.anotador.frontend.components.popUps.GetNumberPopup
 
 @Composable
-fun GetPointLimit(onDefined: (Int?) -> Unit) {
+fun GetPointLimit(boundsCheck: (Int) -> Boolean, outBoundsMsg: String, onDefined: (Int?) -> Unit) {
     GetNumberPopup(
         placeHolder = stringResource(id = R.string.free_limit),
-        checkNum = { it > 0 },
-        outOfBounds = stringResource(id = R.string.positive_zero),
+        checkNum = boundsCheck,
+        outOfBounds = outBoundsMsg,
         onOk = { playerCount ->
             onDefined(playerCount)
         }
