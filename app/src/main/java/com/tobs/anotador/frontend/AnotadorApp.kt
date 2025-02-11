@@ -463,17 +463,17 @@ private fun Router(
                     if(generala.players.size == 3) {
                         val myPlayers = generala.players.drop(1).toMutableList()
                         updateDb(context, "Gen", myPlayers, winner)
-                        navController.navigateUp()
-                        reset(AppDestinations.GENERALA)
                     }
+                    navController.navigateUp()
+                    reset(AppDestinations.GENERALA)
                 }
             ) { winner ->
                 if(generala.players.size == 3) {
                     val myPlayers = generala.players.drop(1).toMutableList()
                     updateDb(context, "Gen", myPlayers, winner)
-                    restart()
-                    setClicked(AppDestinations.GENERALA)
                 }
+                restart()
+                setClicked(AppDestinations.GENERALA)
             }
         }
 
