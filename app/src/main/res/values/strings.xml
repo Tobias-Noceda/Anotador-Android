@@ -5,6 +5,7 @@
     <string name="generala" translatable="false">Generala</string>
     <string name="canasta" translatable="false">Canasta</string>
     <string name="carioca" translatable="false">Carioca</string>
+    <string name="cocktail" translatable="false">Cocktail</string>
     <string name="truco" translatable="false">Truco</string>
     <string name="escoba" translatable="false">Escoba</string>
     <string name="free">Libre</string>
