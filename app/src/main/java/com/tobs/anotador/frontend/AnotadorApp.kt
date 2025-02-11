@@ -31,12 +31,10 @@ import com.tobs.anotador.frontend.screens.CanastaScreen
 import com.tobs.anotador.frontend.screens.CariocaScreen
 import com.tobs.anotador.frontend.screens.ClassicScreen
 import com.tobs.anotador.frontend.screens.GeneralaScreen
-import com.tobs.anotador.frontend.screens.HistoryScreen
 import com.tobs.anotador.frontend.screens.generic.MatchesScreen
 import com.tobs.anotador.frontend.screens.generic.MenuScreen
 import com.tobs.anotador.frontend.starters.GetPlayerCount
 import com.tobs.anotador.frontend.starters.GetPlayersList
-import com.tobs.anotador.frontend.starters.updateDb
 import com.tobs.anotador.viewModel.GameViewModel
 
 enum class AppDestinations(
@@ -385,8 +383,7 @@ private fun Router(
                     AppDestinations.GENERALA,
                     AppDestinations.CANASTA,
                     AppDestinations.CARIOCA
-                ),
-                history = true
+                )
             ) { setClicked(it) }
         }
 
@@ -423,13 +420,11 @@ private fun Router(
             MatchesScreen(
                 modifier = modifier,
                 matches = escoba!!,
-                onBack = { winner, _ ->
-                    updateDb(context, "Esc", escoba.players, winner)
+                onBack = { _, _ ->
                     navController.navigateUp()
                     reset(AppDestinations.ESCOBA)
                 }
-            ) { winner, _ ->
-                updateDb(context, "Esc", escoba.players, winner)
+            ) { _, _ ->
                 restart()
                 setClicked(AppDestinations.ESCOBA)
             }
@@ -439,17 +434,11 @@ private fun Router(
             MatchesScreen(
                 modifier = modifier,
                 matches = free!!,
-                onBack = { winner, limit ->
-                    if (limit == 15 || limit == 30) {
-                        updateDb(context, "Tru", free.players, winner)
-                    }
+                onBack = { _, _ ->
                     navController.navigateUp()
                     reset(AppDestinations.FREE)
                 }
-            ) { winner, limit ->
-                if (limit == 15 || limit == 30) {
-                    updateDb(context, "Tru", free.players, winner)
-                }
+            ) { _,_ ->
                 restart()
                 setClicked(AppDestinations.FREE)
             }
@@ -459,21 +448,13 @@ private fun Router(
             GeneralaScreen(
                 modifier = modifier,
                 generala = generala!!,
-                onBack = { winner ->
-                    if(generala.players.size == 3) {
-                        val myPlayers = generala.players.drop(1).toMutableList()
-                        updateDb(context, "Gen", myPlayers, winner)
-                        navController.navigateUp()
-                        reset(AppDestinations.GENERALA)
-                    }
+                onBack = { _ ->
+                    navController.navigateUp()
+                    reset(AppDestinations.GENERALA)
                 }
-            ) { winner ->
-                if(generala.players.size == 3) {
-                    val myPlayers = generala.players.drop(1).toMutableList()
-                    updateDb(context, "Gen", myPlayers, winner)
-                    restart()
-                    setClicked(AppDestinations.GENERALA)
-                }
+            ) { _ ->
+                restart()
+                setClicked(AppDestinations.GENERALA)
             }
         }
 
@@ -481,13 +462,11 @@ private fun Router(
             CanastaScreen(
                 modifier = modifier,
                 canasta = canasta!!,
-                onBack = { winner ->
-                    updateDb(context, "Can", canasta.players, winner)
+                onBack = { _ ->
                     navController.navigateUp()
                     reset(AppDestinations.CANASTA)
                 }
-            ) { winner ->
-                updateDb(context, "Can", canasta.players, winner)
+            ) { _ ->
                 restart()
                 setClicked(AppDestinations.CANASTA)
             }
@@ -502,10 +481,6 @@ private fun Router(
                 restart()
                 setClicked(AppDestinations.CANASTA)
             }
-        }
-        
-        composable(AppDestinations.HISTORY.route) {
-            HistoryScreen(modifier = modifier)
         }
     }
 }
