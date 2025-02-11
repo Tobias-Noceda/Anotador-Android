@@ -54,7 +54,7 @@ fun MenuScreen(
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(boxHeight * 0.3f)
+                    .height(boxHeight * 0.25f)
             )
             Column(modifier = Modifier.fillMaxWidth()) {
                 for (button in buttons) {
@@ -63,7 +63,7 @@ fun MenuScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 12.dp, vertical = 4.dp)
-                            .height(boxHeight * 0.1f),
+                            .height(boxHeight * 0.09f),
                         shape = RoundedCornerShape(12.dp),
                         colors = colors
                     ) {
@@ -79,7 +79,7 @@ fun MenuScreen(
                 Button(
                     onClick = { navController.navigate(AppDestinations.HISTORY.route) },
                     modifier = Modifier
-                        .height(boxHeight * 0.1f)
+                        .height(boxHeight * 0.09f)
                         .padding(horizontal = 12.dp, vertical = 4.dp),
                     shape = RoundedCornerShape(12.dp),
                     colors = colors

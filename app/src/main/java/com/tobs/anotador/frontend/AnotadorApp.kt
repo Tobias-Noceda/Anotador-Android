@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -13,6 +14,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -22,6 +24,7 @@ import com.tobs.anotador.R
 import com.tobs.anotador.backend.Canasta
 import com.tobs.anotador.backend.Carioca
 import com.tobs.anotador.backend.ClassicScorekeeper
+import com.tobs.anotador.backend.Cocktail
 import com.tobs.anotador.backend.Generala
 import com.tobs.anotador.backend.Matches
 import com.tobs.anotador.backend.Player
@@ -30,6 +33,7 @@ import com.tobs.anotador.frontend.components.popUps.TrucoPopUp
 import com.tobs.anotador.frontend.screens.CanastaScreen
 import com.tobs.anotador.frontend.screens.CariocaScreen
 import com.tobs.anotador.frontend.screens.ClassicScreen
+import com.tobs.anotador.frontend.screens.CocktailScreen
 import com.tobs.anotador.frontend.screens.GeneralaScreen
 import com.tobs.anotador.frontend.screens.HistoryScreen
 import com.tobs.anotador.frontend.screens.generic.MatchesScreen
@@ -53,6 +57,7 @@ enum class AppDestinations(
     GENERALA(R.string.generala, "generala"),
     CANASTA(R.string.canasta, "canasta"),
     CARIOCA(R.string.carioca, "carioca"),
+    COCKTAIL(R.string.cocktail, "cocktail"),
     HISTORY(R.string.history, "history")
 }
 
@@ -76,6 +81,7 @@ fun AnotadorApp(
                 generala,
                 canasta,
                 carioca,
+                cocktail,
                 setClicked = { clicked = it },
                 restart = { restart = true }
             ) {
@@ -106,6 +112,10 @@ fun AnotadorApp(
 
                     AppDestinations.CARIOCA -> {
                         carioca = null
+                    }
+
+                    AppDestinations.COCKTAIL -> {
+                        cocktail = null
                     }
 
                     else -> {}
@@ -349,6 +359,32 @@ fun AnotadorApp(
                     }
                 }
 
+                AppDestinations.COCKTAIL -> {
+                    if (cocktail == null || restart) {
+                        GetPlayersList(4) { collectedPlayers ->
+                            if (collectedPlayers.isNotEmpty()) {
+                                playersList = collectedPlayers
+                                cocktail = Cocktail(playersList)
+                                clicked?.let {
+                                    if (restart) {
+                                        navController.navigateUp()
+                                    }
+                                    navController.navigate(it.route)
+                                }
+                            }
+                            clicked = null
+                            restart = false
+                        }
+                    } else {
+                        ResumePopUp(
+                            onYes = {
+                                clicked?.let { navController.navigate(it.route) }; clicked = null
+                            },
+                            onNo = { cocktail = null }
+                        ) { clicked = null }
+                    }
+                }
+
                 else -> {}
             }
         }
@@ -365,6 +401,7 @@ private fun Router(
     generala: Generala?,
     canasta: Canasta?,
     carioca: Carioca?,
+    cocktail: Cocktail?,
     setClicked: (AppDestinations?) -> Unit,
     restart: () -> Unit,
     reset: (AppDestinations) -> Unit
@@ -385,7 +422,8 @@ private fun Router(
                     AppDestinations.MATCHES,
                     AppDestinations.GENERALA,
                     AppDestinations.CANASTA,
-                    AppDestinations.CARIOCA
+                    AppDestinations.CARIOCA,
+                    AppDestinations.COCKTAIL
                 ),
                 history = true
             ) { setClicked(it) }
@@ -502,6 +540,17 @@ private fun Router(
             ) {
                 restart()
                 setClicked(AppDestinations.CANASTA)
+            }
+        }
+
+        composable(AppDestinations.COCKTAIL.route) {
+            CocktailScreen(
+                modifier = modifier,
+                cocktail = cocktail!!,
+                onBack = { navController.navigateUp(); reset(AppDestinations.COCKTAIL) }
+            ) {
+                restart()
+                setClicked(AppDestinations.COCKTAIL)
             }
         }
         
