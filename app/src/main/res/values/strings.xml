@@ -2,15 +2,15 @@
     <string name="app_name">Anotador</string>
     <string name="classic">Anotador clásico</string>
     <string name="matches">Anotadores con fosforos</string>
-    <string name="generala">Generala</string>
-    <string name="canasta">Canasta</string>
-    <string name="carioca">Carioca</string>
-    <string name="truco">Truco</string>
-    <string name="escoba">Escoba</string>
+    <string name="generala" translatable="false">Generala</string>
+    <string name="canasta" translatable="false">Canasta</string>
+    <string name="carioca" translatable="false">Carioca</string>
+    <string name="truco" translatable="false">Truco</string>
+    <string name="escoba" translatable="false">Escoba</string>
     <string name="free">Libre</string>
     <string name="history">Historial</string>
     <string name="ok">OK</string>
-    <string name="restart">Restart</string>
+    <string name="restart">Reiniciar</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="us">Nos</string>
@@ -23,10 +23,11 @@
     <string name="positive">Debe ingresar un número entero mayor a 1</string>
     <string name="positive_zero">Debe ingresar un número entero mayor o igual a 0</string>
     <string name="amount" tools:ignore="Typos">Cant. jugadores</string>
+    <string name="free_limit" tools:ignore="Typos">Limite de puntos</string>
     <string name="score">Puntaje de</string>
     <string name="base">Base de</string>
     <string name="won">El juego ha terminado, ganó</string>
-    <string name="instructions">Haga click en OK para ir al menu principal, en Restart para iniciar un nuevo juego o cancele para volver al tablero</string>
+    <string name="instructions">Haga click en OK para ir al menu principal, en Reiniciar para iniciar un nuevo juego o cancele para volver al tablero</string>
     <string name="continue_game">¿Desea continuar con la partida anterior?</string>
     <string name="lost">Si elige que no, se borrará la partida anterior</string>
     <string name="cash">Desea una agregar caja a </string>
