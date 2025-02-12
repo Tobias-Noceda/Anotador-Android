@@ -5,7 +5,7 @@ import java.util.*;
 public class Canasta extends ClassicScorekeeper {
 
     private final List<Integer> floor;
-    private final int limit1, limit2, limit3;
+    private final int limit2, limit3;
 
     /**
      * Creates a new Canasta scorekeeper.
@@ -16,9 +16,8 @@ public class Canasta extends ClassicScorekeeper {
      * @param limit3 The third limit of the game.
      */
     public Canasta(Collection<Player> players, int limit1, int limit2, int limit3) {
-        super(players);
+        super(players, limit1);
         floor = new ArrayList<>(Collections.nCopies(players.size(), 50));
-        this.limit1 = limit1;
         this.limit2 = limit2;
         this.limit3 = limit3;
     }
@@ -47,14 +46,11 @@ public class Canasta extends ClassicScorekeeper {
         score += newScore;
         super.setScore(id, score);
         incPlayedRounds(id);
-        if(score >= limit1 && score < limit2) {
+        if(score >= getLimit() && score < limit2) {
             floor.set(id, 90);
         } else if(score >= limit2 && score < limit3) {
             floor.set(id, 120);
-        } else if(score >= limit3) {
-            floor.set(id, 120);
-            return true;
-        }
+        } else return score >= limit3;
 
         return false;
     }
@@ -75,5 +71,4 @@ public class Canasta extends ClassicScorekeeper {
     public String getScore(int id) {
         return getScore(id, getPlayedRounds(id));
     }
-
 }

@@ -28,6 +28,7 @@ import com.tobs.anotador.backend.Matches
 import com.tobs.anotador.backend.Player
 import com.tobs.anotador.frontend.components.popUps.ResumePopUp
 import com.tobs.anotador.frontend.components.popUps.TrucoPopUp
+import com.tobs.anotador.frontend.starters.WantLimitPopUp
 import com.tobs.anotador.frontend.screens.CanastaScreen
 import com.tobs.anotador.frontend.screens.CariocaScreen
 import com.tobs.anotador.frontend.screens.ClassicScreen
@@ -122,30 +123,53 @@ fun AnotadorApp(
             when (clicked) {
                 AppDestinations.CLASSIC -> {
                     if (classic == null || restart) {
-                        var playerCount by rememberSaveable { mutableIntStateOf(0) }
-                        if (playerCount == 0) {
-                            GetPlayerCount {
+                        var hasLimit by rememberSaveable { mutableStateOf<Boolean?>(null) }
+                        var limit by rememberSaveable { mutableIntStateOf(0) }
+                        if(hasLimit == null) {
+                            WantLimitPopUp(
+                                onYes = { hasLimit = true },
+                                onNo = { hasLimit = false }
+                            ) {
+                                clicked = null
+                            }
+                        } else if(hasLimit!! && limit == 0) {
+                            GetPointLimit(
+                                boundsCheck = { it > 0 },
+                                outBoundsMsg = stringResource(id = R.string.positive)
+                            ) {
                                 if (it == null) {
                                     clicked = null
                                     restart = false
                                 } else {
-                                    playerCount = it
+                                    limit = it
                                 }
                             }
                         } else {
-                            GetPlayersList(playerCount) { collectedPlayers ->
-                                if (collectedPlayers.isNotEmpty()) {
-                                    playersList = collectedPlayers
-                                    classic = ClassicScorekeeper(playersList)
-                                    clicked?.let {
-                                        if (restart) {
-                                            navController.navigateUp()
-                                        }
-                                        navController.navigate(it.route)
+                            var playerCount by rememberSaveable { mutableIntStateOf(0) }
+                            if (playerCount == 0) {
+                                GetPlayerCount {
+                                    if (it == null) {
+                                        clicked = null
+                                        restart = false
+                                    } else {
+                                        playerCount = it
                                     }
                                 }
-                                clicked = null
-                                restart = false
+                            } else {
+                                GetPlayersList(playerCount) { collectedPlayers ->
+                                    if (collectedPlayers.isNotEmpty()) {
+                                        playersList = collectedPlayers
+                                        classic = ClassicScorekeeper(playersList, limit)
+                                        clicked?.let {
+                                            if (restart) {
+                                                navController.navigateUp()
+                                            }
+                                            navController.navigate(it.route)
+                                        }
+                                    }
+                                    clicked = null
+                                    restart = false
+                                }
                             }
                         }
                     } else {
@@ -431,7 +455,23 @@ private fun Router(
         }
 
         composable(AppDestinations.CLASSIC.route) {
-            ClassicScreen(modifier = modifier, scorer = classic!!)
+            ClassicScreen(
+                modifier = modifier,
+                scorer = classic!!,
+                onBack = { winner ->
+                    if(classic.limit == 100 && classic.players.size == 2) {
+                        updateDb(context,"Chi", classic.players, winner)
+                    }
+                    navController.navigateUp()
+                    reset(AppDestinations.COCKTAIL)
+                }
+            ) { winner ->
+                if(classic.limit == 100 && classic.players.size == 2) {
+                    updateDb(context,"Chi", classic.players, winner)
+                }
+                restart()
+                setClicked(AppDestinations.COCKTAIL)
+            }
         }
 
         composable(AppDestinations.MATCHES.route) {

@@ -20,7 +20,7 @@ import com.tobs.anotador.frontend.screens.generic.GridScreen
 import com.tobs.anotador.frontend.starters.getFromDb
 
 val names = listOf("Tobi", "Jose")
-val games = listOf("Truco", "Escoba", "Canasta", "Generala", "Batalla")
+val games = listOf("Truco", "Escoba", "Chinchón", "Canasta", "Generala", "Batalla")
 
 @Composable
 fun HistoryScreen(modifier: Modifier) {

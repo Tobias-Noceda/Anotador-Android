@@ -5,12 +5,14 @@ import java.util.*;
 public class ClassicScorekeeper extends Scorekeeper {
 
     private final List<Integer> playedRounds = new ArrayList<>();
+    private final int limit;
+    private boolean limitReached = false;
 
     /**
      * Creates a new Classic scorekeeper. Setting the grid of scores and the number of played rounds of each player.
      * @param players The players of the game.
      */
-    public ClassicScorekeeper(Collection<Player> players) {
+    public ClassicScorekeeper(Collection<Player> players, int limit) {
         List<List<String>> playersList = new ArrayList<>();
 
         for (Player player : players) {
@@ -21,6 +23,16 @@ public class ClassicScorekeeper extends Scorekeeper {
         }
 
         setPlayers(playersList);
+        this.limit = limit;
+    }
+
+    /**
+     * Lets the user get the established limit
+     *
+     * @return The limit
+     */
+    public int getLimit() {
+        return limit;
     }
 
     /**
@@ -61,7 +73,10 @@ public class ClassicScorekeeper extends Scorekeeper {
     @Override
     public boolean addScore(int playerIndex, Integer newScore) {
         super.addScore(playerIndex, newScore);
-        playedRounds.set(playerIndex, playedRounds.get(playerIndex) + 1);
+        incPlayedRounds(playerIndex);
+        if(Integer.parseInt(getScore(playerIndex)) > limit) {
+            limitReached = true;
+        }
         return getRoundsCount() % getColumns() == 0;
     }
 
@@ -69,5 +84,9 @@ public class ClassicScorekeeper extends Scorekeeper {
     public void setScore(int playerIndex, int position, Integer newScore) {
         super.setScore(playerIndex, position, newScore);
         decRoundsCount();
+    }
+
+    public boolean isLimitReached() {
+        return limit > 0 && limitReached;
     }
 }

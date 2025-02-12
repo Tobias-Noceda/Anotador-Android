@@ -31,6 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String insertInitialValuesSQL = "INSERT INTO " + TABLE_NAME + " (game_type, player1, player2, result_player1, result_player2) VALUES " +
                 "('Tru', 'tobi', 'jose', 0, 0)," +
                 "('Esc', 'tobi', 'jose', 0, 0)," +
+                "('Chi', 'tobi', 'jose', 0, 0)," +
                 "('Can', 'tobi', 'jose', 0, 0)," +
                 "('Gen', 'tobi', 'jose', 0, 0)," +
                 "('Bat', 'tobi', 'jose', 0, 0)";
