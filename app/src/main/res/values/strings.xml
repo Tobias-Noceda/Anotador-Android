@@ -34,4 +34,5 @@
     <string name="lost">Si elige que no, se borrará la partida anterior</string>
     <string name="cash">Desea una agregar caja a </string>
     <string name="limit">¿Hasta cuánto desea jugar?</string>
+    <string name="establish_limit">¿Desea establecer un límite de puntos?</string>
 </resources>

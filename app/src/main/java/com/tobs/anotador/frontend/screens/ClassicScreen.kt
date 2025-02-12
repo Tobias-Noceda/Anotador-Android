@@ -15,13 +15,22 @@ import com.tobs.anotador.backend.ClassicScorekeeper
 import com.tobs.anotador.frontend.components.ClickableNumGridItem
 import com.tobs.anotador.frontend.components.UnclickableTextGridItem
 import com.tobs.anotador.frontend.components.popUps.GetNumberPopup
+import com.tobs.anotador.frontend.components.popUps.WinnerPopup
 import com.tobs.anotador.frontend.screens.generic.GridScreen
 
 @Composable
-fun ClassicScreen(modifier: Modifier, scorer: ClassicScorekeeper) {
+fun ClassicScreen(
+    modifier: Modifier,
+    scorer: ClassicScorekeeper,
+    onBack: (String) -> Unit,
+    onRestart: (String) -> Unit
+) {
     val players = scorer.players
     val cells = remember { mutableStateListOf<@Composable () -> Unit>() }
     var adding: Int? by rememberSaveable { mutableStateOf(null) }
+    var finished by rememberSaveable { mutableStateOf(false) }
+    var winner by rememberSaveable { mutableStateOf("") }
+    var showWon by rememberSaveable { mutableStateOf(false) }
 
     var minPlayedRounds by rememberSaveable {
        mutableIntStateOf(getMin(scorer.getPlayedRounds(0), scorer.getPlayedRounds(1)))
@@ -52,10 +61,15 @@ fun ClassicScreen(modifier: Modifier, scorer: ClassicScorekeeper) {
         }
     }
 
-    if (adding != null && scorer.getPlayedRounds(adding!!) <= minPlayedRounds) {
+    if (adding != null && scorer.getPlayedRounds(adding!!) <= minPlayedRounds && !finished) {
         GetPoints(playerName = players[adding!!]) {
             if(it != null) {
                 onAdd(adding!!, it, scorer, cells) { id -> adding = id }
+                if(scorer.roundsCount % players.size == 0 && scorer.isLimitReached) {
+                    winner = getWinner(players, scorer);
+                    finished = true;
+                    showWon = true
+                }
                 if (scorer.roundsCount % players.size == 0) {
                     minPlayedRounds++
                     if (minPlayedRounds >= 12) {
@@ -69,8 +83,18 @@ fun ClassicScreen(modifier: Modifier, scorer: ClassicScorekeeper) {
                 adding = null
             }
         }
+    } else if(finished) {
+        showWon = true
     } else {
         adding = null
+    }
+
+    if(showWon) {
+        WinnerPopup(
+            winner = winner,
+            onOk = { onBack(winner) },
+            onRestart = { onRestart(winner)}
+        ) { showWon = false }
     }
 
     GridScreen(
@@ -112,4 +136,18 @@ private fun GetPoints(playerName: String, onComplete: (Int?) -> Unit) {
     ) {
         onComplete(null)
     }
+}
+
+private fun getWinner(players: List<String>, scorer: ClassicScorekeeper): String {
+    var minScore = Integer.MAX_VALUE
+    var winner = ""
+    for(i in players.indices) {
+        val auxScore = Integer.parseInt(scorer.getScore(i))
+        if(auxScore < minScore) {
+            minScore = auxScore;
+            winner = players[i];
+        }
+    }
+
+    return winner
 }
