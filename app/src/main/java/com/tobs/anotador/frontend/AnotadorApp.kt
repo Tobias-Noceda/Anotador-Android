@@ -459,11 +459,17 @@ private fun Router(
             ClassicScreen(
                 modifier = modifier,
                 scorer = classic!!,
-                onBack = { _ ->
+                onBack = { winner ->
+                    if(classic.limit == 100 && classic.players.size == 2) {
+                        updateDb(context,"Chi", classic.players, winner)
+                    }
                     navController.navigateUp()
                     reset(AppDestinations.COCKTAIL)
                 }
-            ) { _ ->
+            ) { winner ->
+                if(classic.limit == 100 && classic.players.size == 2) {
+                    updateDb(context,"Chi", classic.players, winner)
+                }
                 restart()
                 setClicked(AppDestinations.COCKTAIL)
             }
