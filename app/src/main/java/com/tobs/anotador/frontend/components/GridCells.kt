@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import com.tobs.anotador.ui.theme.darken
 
 @Composable
 fun ClickableNumGridItem(
@@ -67,6 +68,7 @@ fun ClickableNumGridItem(
 fun ClickableTextGridItem(
     content: String,
     fontSize: TextUnit? = null,
+    darken: Boolean = false,
     onClick: () -> Unit
 ) {
     val defaultTextStyle = MaterialTheme.typography.titleLarge
@@ -82,7 +84,7 @@ fun ClickableTextGridItem(
             ) { onClick() },
         shape = RectangleShape,
         colors = CardColors(
-            MaterialTheme.colorScheme.primary,
+            if (darken) MaterialTheme.colorScheme.primary.darken(.7f) else MaterialTheme.colorScheme.primary,
             Color.Black,
             MaterialTheme.colorScheme.primary,
             MaterialTheme.colorScheme.primary
@@ -165,7 +167,11 @@ fun DropdownTextGridItem(
 }
 
 @Composable
-fun UnclickableTextGridItem(content: String, fontSize: TextUnit? = null) {
+fun UnclickableTextGridItem(
+    content: String,
+    fontSize: TextUnit? = null,
+    darken: Boolean = false
+) {
     val defaultTextStyle = MaterialTheme.typography.titleLarge
     val fixedHeight = calculateTextHeight(defaultTextStyle)
 
@@ -175,7 +181,7 @@ fun UnclickableTextGridItem(content: String, fontSize: TextUnit? = null) {
             .height(fixedHeight),
         shape = RectangleShape,
         colors = CardColors(
-            MaterialTheme.colorScheme.primary,
+            if (darken) MaterialTheme.colorScheme.primary.darken(.7f) else MaterialTheme.colorScheme.primary,
             Color.Black,
             MaterialTheme.colorScheme.primary,
             MaterialTheme.colorScheme.primary

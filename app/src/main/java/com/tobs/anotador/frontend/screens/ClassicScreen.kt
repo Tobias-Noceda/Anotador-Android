@@ -45,7 +45,7 @@ fun ClassicScreen(
             }
         }
         for (i in 0 until players.size) {
-            cells[i] = { UnclickableTextGridItem(content = players[i]) }
+            cells[i] = { UnclickableTextGridItem(content = players[i], darken = true) }
         }
         for (j in 0 until players.size) {
             for (k in 1 .. scorer.getPlayedRounds(j)) {

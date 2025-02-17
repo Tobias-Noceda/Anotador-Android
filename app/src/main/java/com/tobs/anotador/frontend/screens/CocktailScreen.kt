@@ -47,7 +47,8 @@ fun CocktailScreen(modifier: Modifier, cocktail: Cocktail, onBack: () -> Unit, o
             cells[updatedIndex] = {
                 UnclickableTextGridItem(
                     content = cocktail.getScore(0, j),
-                    fontSize = fontSize
+                    fontSize = fontSize,
+                    darken = true
                 )
             }
         }
@@ -55,7 +56,8 @@ fun CocktailScreen(modifier: Modifier, cocktail: Cocktail, onBack: () -> Unit, o
             cells[k] = {
                 UnclickableTextGridItem(
                     content = players[k],
-                    fontSize = fontSize
+                    fontSize = fontSize,
+                    darken = true
                 )
             }
             for (r in 1 until cocktail.getPlayedRounds(k) + 1) {

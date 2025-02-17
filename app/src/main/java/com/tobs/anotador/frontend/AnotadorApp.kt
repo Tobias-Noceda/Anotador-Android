@@ -458,11 +458,11 @@ private fun Router(
                 scorer = classic!!,
                 onBack = { _ ->
                     navController.navigateUp()
-                    reset(AppDestinations.COCKTAIL)
+                    reset(AppDestinations.CLASSIC)
                 }
             ) { _ ->
                 restart()
-                setClicked(AppDestinations.COCKTAIL)
+                setClicked(AppDestinations.CLASSIC)
             }
         }
 

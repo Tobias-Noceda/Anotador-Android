@@ -32,11 +32,11 @@ fun GeneralaScreen(
         for (i in 0 until generala.rows) {
             updatedIndex = i * generala.columns
             cells[updatedIndex] = {
-                UnclickableTextGridItem(content = generala.getScore(0, i))
+                UnclickableTextGridItem(content = generala.getScore(0, i), darken = true)
             }
         }
         for (j in 1 until players.size) {
-            cells[j] = { UnclickableTextGridItem(content = players[j]) }
+            cells[j] = { UnclickableTextGridItem(content = players[j], darken = true) }
             for (k in 1 until generala.rows - 1) {
                 val index = k * generala.columns + j
                 cells[index] = {
@@ -62,7 +62,7 @@ fun GeneralaScreen(
         for (playerIndex in 1 until players.size) {
             val index = generala.columns * (generala.rows - 1) + playerIndex
             cells[index] = {
-                UnclickableTextGridItem(content = generala.getScore(playerIndex))
+                UnclickableTextGridItem(content = generala.getScore(playerIndex), darken = true)
             }
         }
     }
@@ -124,7 +124,7 @@ private fun onSelected(
         }
     }
     val index = generala.columns * (generala.rows - 1) + playerIndex
-    cells[index] = { UnclickableTextGridItem(content = generala.getScore(playerIndex)) }
+    cells[index] = { UnclickableTextGridItem(content = generala.getScore(playerIndex), darken = true) }
 }
 
 private fun getWinner(generala: Generala): String {

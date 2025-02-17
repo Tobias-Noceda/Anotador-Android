@@ -43,12 +43,13 @@ fun CariocaScreen(modifier: Modifier, carioca: Carioca, onBack: () -> Unit, onRe
         for (i in 0 until carioca.rows * carioca.columns) {
             cells += { ClickableNumGridItem(content = null) { adding = i % players.size } }
         }
-        for ( j in 0 until carioca.rows) {
+        for (j in 0 until carioca.rows) {
             updatedIndex = j * carioca.columns
             cells[updatedIndex] = {
                 UnclickableTextGridItem(
                     content = carioca.getScore(0, j),
-                    fontSize = fontSize
+                    fontSize = fontSize,
+                    darken = true
                 )
             }
         }
@@ -56,7 +57,8 @@ fun CariocaScreen(modifier: Modifier, carioca: Carioca, onBack: () -> Unit, onRe
             cells[k] = {
                 ClickableTextGridItem(
                     content = "${players[k]} (${carioca.getCashCount(k)})",
-                    fontSize = fontSize
+                    fontSize = fontSize,
+                    darken = true
                 ) {
                     cash = k
                 }
@@ -142,7 +144,8 @@ private fun AddCash(
         cells[playerIndex] = {
             ClickableTextGridItem(
                 content = "${carioca.players[playerIndex]} (${carioca.getCashCount(playerIndex)})",
-                fontSize = fontSize
+                fontSize = fontSize,
+                darken = true
             ) {
                 setCash(playerIndex)
             }
