@@ -464,14 +464,14 @@ private fun Router(
                         updateDb(context,"Chi", classic.players, winner)
                     }
                     navController.navigateUp()
-                    reset(AppDestinations.COCKTAIL)
+                    reset(AppDestinations.CLASSIC)
                 }
             ) { winner ->
                 if(classic.limit == 100 && classic.players.size == 2) {
                     updateDb(context,"Chi", classic.players, winner)
                 }
                 restart()
-                setClicked(AppDestinations.COCKTAIL)
+                setClicked(AppDestinations.CLASSIC)
             }
         }
 

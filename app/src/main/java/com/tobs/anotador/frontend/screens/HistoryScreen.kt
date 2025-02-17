@@ -29,12 +29,12 @@ fun HistoryScreen(modifier: Modifier) {
     val context = LocalContext.current
 
     if (cells.isEmpty()) {
-        cells += { UnclickableTextGridItem(content = "") }
+        cells += { UnclickableTextGridItem(content = "", darken = true) }
         for (name in names) {
-            cells += { UnclickableTextGridItem(content = name) }
+            cells += { UnclickableTextGridItem(content = name, darken = true) }
         }
         for (i in games.indices) {
-            cells += { UnclickableTextGridItem(content = games[i].take(3)) }
+            cells += { UnclickableTextGridItem(content = games[i].take(3), darken = true) }
             for (j in names.indices) {
                 cells += {
                     ClickableNumGridItem(content = getGameScore(context, i, j)) {
