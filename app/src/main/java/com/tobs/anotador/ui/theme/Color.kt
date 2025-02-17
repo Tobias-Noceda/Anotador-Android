@@ -13,6 +13,7 @@ fun Color.darken(factor: Float): Color {
         blue = blue * factor
     )
 }
+
 fun Color.desaturate(saturationFactor: Float): Color {
     // Convert RGB to HSL
     val r = red

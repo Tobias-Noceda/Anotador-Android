@@ -40,16 +40,27 @@ fun CanastaScreen(
         for (i in 0 until players.size * rounds) {
             cells += { ClickableNumGridItem(content = null) { adding = i % 2 } }
         }
+//        for (i in 0 until players.size) {
+//            cells[i] = {
+//                UnclickableTextGridItem(
+//                    content = "${players[i]} (${canasta.getFloor(i)})",
+//                    darken = true
+//                )
+//            }
+//        }
         for (i in 0 until players.size) {
-            cells[i] = { UnclickableTextGridItem(content = "${players[i]} (${canasta.getFloor(i)})") }
-        }
-        for (j in 0 until players.size) {
-            for (k in 1 .. canasta.getPlayedRounds(j)) {
-                val updatedIndex = (k * players.size) + j
+            cells[i] = {
+                UnclickableTextGridItem(
+                    content = "${players[i]} (${canasta.getFloor(i)})",
+                    darken = true
+                )
+            }
+            for (j in 1 .. canasta.getPlayedRounds(i)) {
+                val updatedIndex = (j * players.size) + i
                 if (updatedIndex < cells.size) {
                     cells[updatedIndex] = {
-                        ClickableNumGridItem(content = canasta.getScore(j, k).toIntOrNull() ?: 0) {
-                            adding = j
+                        ClickableNumGridItem(content = canasta.getScore(i, j).toIntOrNull() ?: 0) {
+                            adding = i
                         }
                     }
                 }
@@ -139,7 +150,12 @@ private fun onAdd(
                 onClick = { onClick(column) }
             )
         }
-        cells[column] = { UnclickableTextGridItem(content = "${canasta.players[column]} (${canasta.getFloor(column)})") }
+        cells[column] = {
+            UnclickableTextGridItem(
+                content = "${canasta.players[column]} (${canasta.getFloor(column)})",
+                darken = true
+            )
+        }
     }
 
     return finished

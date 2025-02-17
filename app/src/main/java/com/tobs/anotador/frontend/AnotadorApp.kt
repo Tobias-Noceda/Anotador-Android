@@ -8,6 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -463,14 +464,14 @@ private fun Router(
                         updateDb(context,"Chi", classic.players, winner)
                     }
                     navController.navigateUp()
-                    reset(AppDestinations.COCKTAIL)
+                    reset(AppDestinations.CLASSIC)
                 }
             ) { winner ->
                 if(classic.limit == 100 && classic.players.size == 2) {
                     updateDb(context,"Chi", classic.players, winner)
                 }
                 restart()
-                setClicked(AppDestinations.COCKTAIL)
+                setClicked(AppDestinations.CLASSIC)
             }
         }
 
